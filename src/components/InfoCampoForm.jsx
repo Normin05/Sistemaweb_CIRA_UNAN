@@ -96,7 +96,7 @@ export default function CampoForm() {
       <header className="bg-blue-900 text-white py-4">
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row items-center justify-between px-4">
           <img
-            src="https://cira.unan.edu.ni/wp-content/uploads/2025/01/marca_cira_2024_FINAL-01.png"
+            src="/src/assets/CIRA.png"
             alt="Logo CIRA"
             className="h-16 mb-2 md:mb-0"
           />

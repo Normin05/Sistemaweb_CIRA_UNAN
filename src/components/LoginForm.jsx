@@ -1,10 +1,11 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { FaUserAlt, FaLock } from "react-icons/fa";
+import { FaUserAlt, FaLock, FaEye, FaEyeSlash } from "react-icons/fa";
 
 export default function LoginForm() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false); // <--- para el ojito
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
@@ -13,7 +14,7 @@ export default function LoginForm() {
     setError("");
 
     try {
-      const response = await fetch("https://wv94tnfc-7055.use2.devtunnels.ms/api/auth/login", {
+      const response = await fetch("http://127.0.0.1:8000/api/login", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email, password }),
@@ -36,8 +37,8 @@ export default function LoginForm() {
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between px-4 py-4">
           <div className="flex justify-center md:justify-start w-full md:w-1/3">
             <img
-              src="https://cira.unan.edu.ni/wp-content/uploads/2025/01/marca_cira_2024_FINAL-01.png"
-              alt="Logo SETEC"
+              src="/src/assets/CIRA.png"
+              alt="Logo CIRA"
               className="h-20 object-contain"
             />
           </div>
@@ -54,7 +55,7 @@ export default function LoginForm() {
       {/* Subencabezado */}
       <div className="bg-yellow-400 py-2">
         <p className="text-center text-blue-900 font-semibold">
-          ÁREA DE EXTENSIÓN Y PROYECCIÓN 
+          ÁREA DE PROYECCIÓN Y EXTENSIÓN
         </p>
       </div>
 
@@ -109,15 +110,22 @@ export default function LoginForm() {
                     <FaLock />
                   </span>
                   <input
-                    type="password"
+                    type={showPassword ? "text" : "password"} // <-- Aquí se alterna
                     id="password"
                     name="password"
                     placeholder="Ingrese su contraseña"
                     value={password}
                     onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-4 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900"
+                    className="pl-10 pr-10 py-2 w-full border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-900"
                     required
                   />
+                  {/* Ojito */}
+                  <span
+                    className="absolute inset-y-0 right-0 pr-3 flex items-center text-gray-600 cursor-pointer"
+                    onClick={() => setShowPassword(!showPassword)}
+                  >
+                    {showPassword ? <FaEyeSlash /> : <FaEye />}
+                  </span>
                 </div>
               </div>
 
@@ -142,21 +150,9 @@ export default function LoginForm() {
                 <hr className="flex-grow border-gray-300" />
               </div>
 
-              {/* Botón Correo Institucional 
-              <button
-                type="button"
-                className="w-full border border-blue-900 text-blue-900 font-semibold py-2 rounded-md hover:bg-blue-50 transition"
-              >
-                Iniciar Sesión por Correo Institucional
-              </button> */}
-
-
               {/* Olvidó contraseña */}
               <p className="text-center mt-4">
-                <a
-                  href="#"
-                  className="text-sm text-blue-900 hover:underline"
-                >
+                <a href="#" className="text-sm text-blue-900 hover:underline">
                   ¿Olvidó su contraseña?
                 </a>
               </p>
@@ -181,4 +177,3 @@ export default function LoginForm() {
     </div>
   );
 }
-
