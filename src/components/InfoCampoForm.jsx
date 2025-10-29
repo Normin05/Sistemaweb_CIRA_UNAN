@@ -112,7 +112,7 @@ export default function CampoForm() {
         ÁREA TÉCNICA, ASEGURAMIENTO Y CONTROL DE LA CALIDAD
       </div>
 
-     {/* *******************************************************************************************************************/}
+     {/* ****************************************************************************************************************** */}
 
       {/* Formulario */}
       <main className="flex-grow flex justify-center py-8 px-4">
